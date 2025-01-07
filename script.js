@@ -20,26 +20,53 @@ function gameBoard() {
             currentPlayer = currentPlayer == 'X' ? 'O' : 'X'
 
             function checkWinner(cell) {
-                if (board[0] === board[1] && board[1] === board[2] && board[0] !== '')
-                    {cell[0].style.backgroundColor = 'green'; cell[1].style.backgroundColor = 'green'; cell[2].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[3] === board[4] && board[4] === board[5] && board[3] !== '')
-                    {cell[3].style.backgroundColor = 'green'; cell[4].style.backgroundColor = 'green'; cell[5].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[6] === board[7] && board[7] === board[8] && board[6] !== '')
-                    {cell[6].style.backgroundColor = 'green'; cell[7].style.backgroundColor = 'green'; cell[8].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[0] === board[3] && board[3] === board[6] && board[0] !== '')
-                    {cell[0].style.backgroundColor = 'green'; cell[3].style.backgroundColor = 'green'; cell[6].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[1] === board[4] && board[4] === board[7] && board[1] !== '')
-                    {cell[1].style.backgroundColor = 'green'; cell[4].style.backgroundColor = 'green'; cell[7].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[2] === board[5] && board[5] === board[8] && board[2] !== '')
-                    {cell[2].style.backgroundColor = 'green'; cell[5].style.backgroundColor = 'green'; cell[8].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[0] === board[4] && board[4] === board[8] && board[0] !== '')
-                    {cell[0].style.backgroundColor = 'green'; cell[4].style.backgroundColor = 'green'; cell[8].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[2] === board[4] && board[4] === board[6] && board[2] !== '')
-                    {cell[2].style.backgroundColor = 'green'; cell[4].style.backgroundColor = 'green'; cell[6].style.backgroundColor = 'green';board = Array(9).fill('')} 
-                if (board[0] !== '' && board[1] !== '' && board[2] !== '' && board[3] !== '' && board[4] !== '' && board[5] !== '' && board[6] !== '' && board[7] !== '' && board[8] !== '') {console.log("DRAW!")};
+                if (checkRow(0, 1, 2)) 
+                    colorRow(cell, 0, 1, 2)
+                else if (checkRow(3, 4, 5))
+                    colorRow(cell, 3, 4, 5)
+                else if (checkRow(6, 7, 8))
+                    colorRow(cell, 6, 7, 8)
+                else if (checkRow(0, 3, 6))
+                    colorRow(cell, 0, 3, 6)
+                else if (checkRow(1, 4, 7))
+                    colorRow(cell, 1, 4, 7)
+                else if (checkRow(2, 5, 8))
+                    colorRow(cell, 2, 5, 8)
+                else if (checkRow(0, 4, 8))
+                    colorRow(cell, 0, 4, 8)
+                else if (checkRow(2, 4, 6))
+                    colorRow(cell, 2, 4, 6)
+                else if (isDraw(board)) {
+                    for (i=0; i<9; i++) {
+                        cell[i].style.backgroundColor = 'red';
+                    }
+                    board = Array(9).fill('')
+                }
             }
             checkWinner(cells)
         }
+    }
+
+    const isDraw = (board) => {
+        let draw = true
+        for (i=0; i<9; i++) {
+            if (board[i] === '') {
+                draw = false
+            }
+        }
+
+        return draw
+    }
+
+    const checkRow = (first, second, third) => {
+        return board[first] === board[second] && board[second] === board[third] && board[first] !== ''
+    }
+
+    const colorRow = (cell, first, second, third) => {
+        cell[first].style.backgroundColor = 'green';
+        cell[second].style.backgroundColor = 'green';
+        cell[third].style.backgroundColor = 'green';
+        board = Array(9).fill('')
     }
 }
 gameBoard()
@@ -51,6 +78,16 @@ function newGame() {
     })
 }
 newGame()
+
+function annouceWinner (e) {
+    let inputX = document.querySelector('#inputX')
+    let inputO = document.querySelector('#inputO')
+    if (e.textContent = 'X') {
+        alert(`${inputX.value} won!`)
+    } else {
+        alert('O won!')
+    }
+}
 
 
 
