@@ -1,28 +1,33 @@
-isXsTurn = true
+function gameBoard() {
+    const board = Array(9).fill(null);
+    console.log(board);
 
-let playerX = {
-    marker: "X",
-    name: "mrX"
-}
+    let currentPlayer = 'X';
 
-let playerO = {
-    marker: 'O',
-    name: 'mrO'
-}
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+        cell.textContent = ""
+        cell.addEventListener('click', handleClick);
+    });
 
-const swichPlayer = () => {
-    isXsTurn = !isXsTurn
-}
+    function handleClick(event) {
+        const index = parseInt(event.target.dataset.index);
 
-const placeMarker = (cell) => {
-    if (isXsTurn){
-        cell.textContent = playerX.marker
-        isXsTurn = false
-    } else {
-        cell.textContent = playerO.marker
-        isXsTurn = true
+        if (board[index] === null) {
+            board[index] = currentPlayer;
+            event.target.textContent = currentPlayer;
+
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
     }
 }
+gameBoard()
 
-let cell = document.querySelectorAll('.cell')
-cell.addEventListener("click", placeMarker(cell))
+function newGame() {
+    let newgame = document.querySelector('.new')
+    newgame.addEventListener('click', () => {
+        console.log("yo")
+        gameBoard()
+    })
+}
+newGame()
