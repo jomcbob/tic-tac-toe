@@ -95,3 +95,7 @@ input {
     width: 62vh;
     color: grey;
 }
+
+.score {
+    display: flex;
+}

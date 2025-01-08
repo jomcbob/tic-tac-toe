@@ -47,10 +47,8 @@ function gameBoard() {
             checkWinner(cells)
             if (currentPlayer == 'X'){
                 currentPlayer = "O"
-                console.log(currentPlayer)
             } else {
                 currentPlayer = 'X'
-                console.log(currentPlayer)
             }
         }
     }
@@ -78,7 +76,7 @@ function gameBoard() {
         cell[first].style.backgroundColor = 'green';
         cell[second].style.backgroundColor = 'green';
         cell[third].style.backgroundColor = 'green';
-        annouceWinner(cell[first])
+        annouceWinner(board[first])
         board = Array(9).fill('')
     }
 }
@@ -92,17 +90,23 @@ function newGame() {
 }
 newGame()
 
-function annouceWinner (player) {
+
+function annouceWinner (box) {
     let inputX = document.querySelector('#inputX')
     let inputO = document.querySelector('#inputO')
-    if (player.textContent == 'X') {
+    let Xscore = document.querySelector('.Xscore')
+    if (box.textContent == 'X') {
         won.textContent = `${inputX.value} won!`
         won.style.backgroundColor = "black"
         won.style.color = 'white'
+        return
     } else {
         won.textContent = `${inputO.value} won!`
         won.style.backgroundColor = "black"
         won.style.color = 'white'
+        number++
+        console.log(number)
+        Oscore.textContent = number
     }
 }
 
