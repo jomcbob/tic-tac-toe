@@ -1,4 +1,7 @@
+let won = document.querySelector('.won')
 function gameBoard() {
+        won.style.backgroundColor = "gray"
+        won.style.color = 'gray'
     let board = Array(9).fill('')
 
     let currentPlayer = "X"
@@ -16,8 +19,6 @@ function gameBoard() {
         if (board[index] === '') {
             board[index] = currentPlayer
             event.target.textContent = currentPlayer
-
-            currentPlayer = currentPlayer == 'X' ? 'O' : 'X'
 
             function checkWinner(cell) {
                 if (checkRow(0, 1, 2)) 
@@ -44,6 +45,13 @@ function gameBoard() {
                 }
             }
             checkWinner(cells)
+            if (currentPlayer == 'X'){
+                currentPlayer = "O"
+                console.log(currentPlayer)
+            } else {
+                currentPlayer = 'X'
+                console.log(currentPlayer)
+            }
         }
     }
 
@@ -54,7 +62,11 @@ function gameBoard() {
                 draw = false
             }
         }
-
+        if (draw){
+            won.textContent = `Draw!`
+            won.style.backgroundColor = "black"
+            won.style.color = 'white'
+        }
         return draw
     }
 
@@ -66,6 +78,7 @@ function gameBoard() {
         cell[first].style.backgroundColor = 'green';
         cell[second].style.backgroundColor = 'green';
         cell[third].style.backgroundColor = 'green';
+        annouceWinner(cell[first])
         board = Array(9).fill('')
     }
 }
@@ -79,13 +92,17 @@ function newGame() {
 }
 newGame()
 
-function annouceWinner (e) {
+function annouceWinner (player) {
     let inputX = document.querySelector('#inputX')
     let inputO = document.querySelector('#inputO')
-    if (e.textContent = 'X') {
-        alert(`${inputX.value} won!`)
+    if (player.textContent == 'X') {
+        won.textContent = `${inputX.value} won!`
+        won.style.backgroundColor = "black"
+        won.style.color = 'white'
     } else {
-        alert('O won!')
+        won.textContent = `${inputO.value} won!`
+        won.style.backgroundColor = "black"
+        won.style.color = 'white'
     }
 }
 
