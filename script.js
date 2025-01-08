@@ -76,7 +76,7 @@ function gameBoard() {
         cell[first].style.backgroundColor = 'green';
         cell[second].style.backgroundColor = 'green';
         cell[third].style.backgroundColor = 'green';
-        annouceWinner(board[first])
+        annouceWinner(cells[first])
         board = Array(9).fill('')
     }
 }
@@ -90,25 +90,27 @@ function newGame() {
 }
 newGame()
 
-
+let numberForO = 0
+let numberForX = 0
 function annouceWinner (box) {
     let inputX = document.querySelector('#inputX')
     let inputO = document.querySelector('#inputO')
-    let Xscore = document.querySelector('.Xscore')
-    if (box.textContent == 'X') {
+    let Xscore = document.querySelector('#Xscore')
+    let Oscore = document.querySelector('#Oscore')
+    if (box.textContent === 'X') {
         won.textContent = `${inputX.value} won!`
         won.style.backgroundColor = "black"
         won.style.color = 'white'
+        numberForX++
+        console.log(numberForX)
+        Xscore.textContent = numberForX
         return
-    } else {
+    } else if (box.textContent === 'O') {
         won.textContent = `${inputO.value} won!`
         won.style.backgroundColor = "black"
         won.style.color = 'white'
-        number++
-        console.log(number)
-        Oscore.textContent = number
+        numberForO++
+        console.log(numberForO)
+        Oscore.textContent = numberForO
     }
 }
-
-
-
