@@ -104,7 +104,6 @@ function annouceWinner (box) {
         numberForX++
         console.log(numberForX)
         Xscore.textContent = numberForX
-        return
     } else if (box.textContent === 'O') {
         won.textContent = `${inputO.value} won!`
         won.style.backgroundColor = "black"
